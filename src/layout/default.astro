@@ -1,0 +1,89 @@
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body class="min-h-[200vh] !overflow-x-hidden">
+		<slot />
+	</body>
+	<style is:global>
+
+@import url('https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap');
+body {
+  font-family: "Assistant" !important;
+  font-style: normal;
+}
+
+.shadow-btn {
+    box-shadow: rgba(0, 0, 0, 0.15) 3.4px 3.4px 0.2px;
+  }
+
+  .overlap-text {
+  position: relative;
+}
+
+.overlap-text::after {
+  content: attr(data-text);
+  position: absolute;
+  translate: rotate(1deg);
+  left: 0;
+  text-align: center;
+  white-space: nowrap;
+   font-family: "Finger Paint", sans-serif;
+  color: #FE0000; 
+  font-size: inherit;
+  z-index: 2; 
+}
+
+
+
+	</style>
+	
+</html>
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	
+	// Register the ScrollTrigger plugin
+	gsap.registerPlugin(ScrollTrigger);
+	
+	// Loop through each counter element
+	document.querySelectorAll(".counter").forEach(counterElement => {
+	  const targetValue = counterElement.getAttribute("data-target") ?? 111;
+	
+	  gsap.to({ value: 0 }, {
+		value: targetValue, // Target number from data-target attribute
+		duration: 2, // Duration of the animation
+		ease: "power1.out", // Smooth easing
+		scrollTrigger: {
+		  trigger: counterElement, // Element to observe
+		  start: "top 80%", // Start animation when the top of the element reaches 80% of the viewport
+		  end: "top 50%", // Animation should finish at 50%
+		  markers: false, // Set to true for debugging scroll position
+		},
+		onUpdate: function () {
+		  // Update the text content of the counter element
+		  counterElement.textContent = Math.floor(this.targets()[0].value).toString();
+		  
+		  // Apply flip animation to the number
+		  gsap.to(counterElement, {
+			rotationX: 180, // Rotate 180 degrees on the X-axis
+			duration: 0.2, // Duration of the flip
+			ease: "power1.out",
+			onComplete: () => {
+			  gsap.to(counterElement, {
+				rotationX: 0, // Reset the rotation after the flip
+				duration: 0.2,
+			  });
+			},
+		  });
+		},
+	  });
+	});
+	
+	
+		  </script>

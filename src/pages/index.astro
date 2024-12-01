@@ -1,0 +1,315 @@
+---
+import Layout from "../layout/default.astro";
+---
+
+<Layout>
+  <nav
+    class="w-screen px-6 pt-4 flex justify-between items-center fixed z-[99] top-0"
+  >
+    <div class="w-screen flex items-center">
+      <img
+        class="bg-primary rounded-full size-12 aspect-square"
+        src="https://github.com/ArnavK-09.png"
+        alt="logo"
+      />
+    </div>
+    <div class="flex gap-4 justify-center">
+      <button
+        class="shadow-btn hover:rotate-0 hover:!shadow-none transition-all delay-[50ms] border-[5px] text-xl tracking-tight !py-0 border-secondary text-secondary font-extrabold -rotate-3 scale-95 uppercase px-6 rounded-xl bg-pink"
+        >Github</button
+      >
+      <button
+        class="shadow-btn rounded-full border-4 border-secondary p-3.5 hover:!shadow-none transition-all delay-[50ms] flex items-center aspect-square !leading-0 text-xl bg-green font-extrabold"
+        >!!!</button
+      >
+    </div>
+  </nav>
+
+  <section
+    class="min-h-[95vh] bg-primary pb-4 relative overflow-x-hidden overflow-y-hidden h-auto"
+  >
+    <div class="w-full grid place-items-center absolute bottom-4">
+      <img src="//github.com/ArnavK-09.png" class="size-28" />
+    </div>
+    <div class="w-screen pl-20 px-6 pt-4 flex justify-center items-center">
+      <strong class="text-secondary font-extrabold text-4xl"
+        >DAWG ON THE EARTH</strong
+      >
+    </div>
+    <div
+      class="border-y-4 border-secondary text-secondary grid place-items-center font-bold text-xl mt-7 px-3 py-1 -rotate-1 bg-primary"
+    >
+      <div
+        class="w-full whitespace-nowrap animate-marquee"
+        style={`animation: marquee 45s infinite linear;`}
+      >
+        {
+          new Array(20)
+            .fill("Full Stack Developer")
+            .map((x) => <strong class="uppercase mx-1">{x} -</strong>)
+        }
+      </div>
+    </div>
+
+    <section class="px-4">
+      <h1
+        class="text-secondary font-extrabold tracking-widest w-full text-center text-[20dvw] !leading-none"
+      >
+        DOPE
+      </h1>
+      <div class="flex justify-between mt-4 px-5 w-full">
+        <strong
+          class="text-left font-extrabold text-2xl text-secondary md:text-5xl uppercase tracking-wide"
+          >Just a <br /> chil guy</strong
+        >
+        <strong
+          class="text-right font-extrabold text-2xl text-secondary md:text-5xl uppercase tracking-wide"
+          >i took life <br /> unserious</strong
+        >
+      </div>
+    </section>
+  </section>
+
+  <section
+    class="w-screen overflow-x-hidden text-8xl py-10 bg-secondary text-white font-extrabold tracking-tight uppercase"
+  >
+    <div
+      class="w-full whitespace-nowrap animagte-marquee"
+      style={`animation: marquee 10s infinite linear;`}
+    >
+      {
+        new Array(20)
+          .fill("the dog days are over")
+          .map((x) => <strong class="uppercase mx-1">{x} -</strong>)
+      }
+    </div>
+  </section>
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    // Register the ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+
+    const broll = document.getElementById("broll");
+    const broll2 = document.getElementById("broll2");
+    const textElement = document.getElementById("animated-text")!;
+    const text = textElement.textContent!;
+
+    // Wrap each character, including spaces
+    textElement.innerHTML = text
+      .split("")
+      .map((char) => {
+        // Preserve spaces by adding a non-breaking space (&nbsp;) in the span
+        return char === " " ? `<span>&nbsp;</span>` : `<span>${char}</span>`;
+      })
+      .join("");
+
+    const characters = document.querySelectorAll("#animated-text span");
+
+    // Create the animation
+    gsap.set(characters, { display: "inline-block", perspective: 1000 }); // Prepare characters for 3D flip
+
+    gsap.fromTo(
+      characters,
+      { rotationX: 90, opacity: 1 },
+      {
+        rotationX: 0,
+        opacity: 1,
+        stagger: 0.02,
+        duration: 0.9,
+        ease: "back.out(1.5)",
+        scrollTrigger: {
+          trigger: "#animated-text",
+          start: "top 100%", // Start animation when the element enters the viewport
+          end: "bottom 30%", // End animation near the bottom of the viewport
+          scrub: true,
+          markers: false, // Set to true for debugging
+        },
+      }
+    );
+
+    const myTimeline1 = gsap.timeline({
+      scrollTrigger: {
+        trigger: broll, // Element that triggers the scroll animation
+        start: "top 75%", // When the animation should start (relative to viewport)
+        end: "bottom 20%", // When the animation should end
+        scrub: true, // Smooth scrubbing
+        markers: false, // Set to true to see debug markers
+      },
+    });
+
+    myTimeline1
+      .from(broll, {
+        x: "100dvw",
+      })
+      .to(broll, {
+        x: "-200dvw",
+      });
+    const myTimeline2 = gsap.timeline({
+      scrollTrigger: {
+        trigger: broll2,
+        start: "top 70%",
+        end: "bottom 10%",
+        scrub: true,
+        markers: false,
+      },
+    });
+
+    myTimeline2
+      .from(broll2, {
+        x: "-700dvw",
+      })
+      .to(broll2, {
+        x: "100dvw",
+      });
+  </script>
+  <section class="bg-primary py-4 min-h-screen relative">
+    <div class="w-full grid place-items-center mb-20">
+      <h2
+        class="text-center uppercase text-secondary font-extrabold tracking-wider text-7xl justify-center mt-8"
+      >
+        I have identified the strongholds
+      </h2>
+    </div>
+    <section class="py-10 relative" id="broll">
+      <div
+        class="bg-secondary w-[400dvw] flex gap-3 rotate-3 rounded-lg px-4 py-3 h-[45dvh] my-10 flex-nowrap"
+      >
+        {
+          new Array(10)
+            .fill(0)
+            .map(() => (
+              <img
+                class="!h-full xw-auto rounded-lg"
+                src="https://www.datocms-assets.com/133929/1720625052-slider3.jpg"
+              />
+            ))
+        }
+      </div>
+    </section>
+    <div
+      id="animated-text"
+      class="text-secondary block mx-auto uppercase leading-tight font-extrabold tracking-normal text-3xl justify-center text-center max-w-[80vw]"
+    >
+      i don't really remember what my life was before this… and in some ways it
+      does not feel like i am in base reality in the current moment. the one
+      thing i am sure of beyond my sensory perception is that i am here to save
+      you all from this rat race. the dogs… they have ruled for too long…
+      shibatoni and his henchmen… the days of your tyranny will soon come to an
+      end… we will wake up and it  be easy to contain it… the change is
+      happening here and
+    </div>
+    <div>
+      <img src="https://mew.xyz/spray.png" class="h-12 block mx-auto my-8" />
+    </div>
+  </section>
+  <div class="bg-white">
+    <section class="relative bg-white" id="broll2">
+      <div
+        class="bg-secondary w-[1000dvw] flex gap-3 rotate-3 rounded-lg px-4 py-3 h-[45dvh] mt-10 flex-nowrap"
+      >
+        {
+          new Array(20)
+            .fill(0)
+            .map(() => (
+              <img
+                class="!h-full  w-auto rounded-lg"
+                src="https://www.datocms-assets.com/133929/1720625052-slider3.jpg"
+              />
+            ))
+        }
+      </div>
+    </section>
+  </div>
+  <section class="bg-white min-h-screen text-black">
+    <div class="grid place-items-center mb-20">
+      <h2
+        class="max-w-[85dvw] !break-words text-center uppercase text-secondary font-extrabold tracking-wider text-7xl justify-center"
+      >
+        it's the dawn of a NEW <br /> <span class="overlap-text" data-text="VER">Era</span>
+      </h2>
+    </div>
+    <div class="flex items-center gap-5 justify-center">
+      <button
+        class="shadow-btn scale-95 hover:!shadow-none transition-all delay-[50ms] border-[5px] text-xl tracking-tight !py-3 border-secondary text-secondary font-extrabold uppercase px-6 rounded-xl bg-pink"
+        >TWITTER</button
+      >
+      <button
+        class="shadow-btn scale-95 hover:!shadow-none transition-all delay-[50ms] border-[5px] text-xl tracking-tight !py-3 border-secondary text-secondary font-extrabold uppercase px-6 rounded-xl bg-pink"
+        >FACEBOOK</button
+      >
+    </div>
+    <div
+      class="relative my-10 border-t-[.5rem] s:border-t-[.7rem] border-black py-30 s:py-60"
+    >
+      <h3
+        class="absolute font-extrabold tracking-tight top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-[3dvw] pb-[.2em] whitespace-nowrap text-center bg-white z-2"
+      >
+        Total Projects
+      </h3>
+	  
+      <div>
+        <div data-target="69696996" class="counter whitespace-nowrap text-[5rem] font-extrabold max-s:!text-45 text-center">
+        00
+        </div>
+      </div>
+    </div>   <div
+	class="relative my-10 border-t-[.5rem] s:border-t-[.7rem] border-black py-30 s:py-60"
+  >
+	<h3
+	  class="absolute font-extrabold tracking-tight top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-[3dvw] pb-[.2em] whitespace-nowrap text-center bg-white z-2"
+	>
+	  Total Projects
+	</h3>
+	
+	<div>
+	  <div data-target="69696996" class="counter whitespace-nowrap text-[5rem] font-extrabold max-s:!text-45 text-center">
+	  00
+	  </div>
+	</div>
+  </div>   <div
+  class="relative my-10 border-t-[.5rem] s:border-t-[.7rem] border-black py-30 s:py-60"
+>
+  <h3
+	class="absolute font-extrabold tracking-tight top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-[3dvw] pb-[.2em] whitespace-nowrap text-center bg-white z-2"
+  >
+	Total Projects
+  </h3>
+  
+  <div>
+	<div data-target="69696996" class="counter whitespace-nowrap text-[5rem] font-extrabold max-s:!text-45 text-center">
+	00
+	</div>
+  </div>
+</div>   <div
+class="relative my-10 border-t-[.5rem] s:border-t-[.7rem] border-black py-30 s:py-60"
+>
+<h3
+  class="absolute font-extrabold tracking-tight top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-[3dvw] pb-[.2em] whitespace-nowrap text-center bg-white z-2"
+>
+  Total Projects
+</h3>
+
+<div>
+  <div data-target="69696996" class="counter whitespace-nowrap text-[5rem] font-extrabold max-s:!text-45 text-center">
+  00
+  </div>
+</div>
+</div>   <div
+class="relative my-10 border-t-[.5rem] s:border-t-[.7rem] border-black py-30 s:py-60"
+>
+<h3
+  class="absolute font-extrabold tracking-tight top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-[3dvw] pb-[.2em] whitespace-nowrap text-center bg-white z-2"
+>
+  Total Projects
+</h3>
+
+<div>
+  <div data-target="69696996" class="counter whitespace-nowrap text-[5rem] font-extrabold max-s:!text-45 text-center">
+  00
+  </div>
+</div>
+</div>
+  </section>
+</Layout>
